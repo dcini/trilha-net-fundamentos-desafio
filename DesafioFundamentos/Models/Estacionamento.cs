@@ -16,7 +16,18 @@ namespace DesafioFundamentos.Models
         {
             // TODO: Pedir para o usuário digitar uma placa (ReadLine) e adicionar na lista "veiculos"
             // *IMPLEMENTE AQUI*
+            string placa = "";
             Console.WriteLine("Digite a placa do veículo para estacionar:");
+            placa = Console.ReadLine();
+            if (String.IsNullOrEmpty(placa))
+            {
+                Console.WriteLine("Não foi adicionado. Tente novamente digitando uma placa");
+            }
+            else
+            {
+                veiculos.Add(placa);    
+            }
+           
         }
 
         public void RemoverVeiculo()
@@ -26,6 +37,8 @@ namespace DesafioFundamentos.Models
             // Pedir para o usuário digitar a placa e armazenar na variável placa
             // *IMPLEMENTE AQUI*
             string placa = "";
+            placa = Console.ReadLine();
+
 
             // Verifica se o veículo existe
             if (veiculos.Any(x => x.ToUpper() == placa.ToUpper()))
@@ -37,10 +50,22 @@ namespace DesafioFundamentos.Models
                 // *IMPLEMENTE AQUI*
                 int horas = 0;
                 decimal valorTotal = 0; 
-
+                //horas = Convert.ToInt32(Console.ReadLine());
+                if (Int32.TryParse(Console.ReadLine(), out horas ))
+                {
+                    valorTotal = precoInicial + (precoPorHora * horas);
+                }
+                else
+                {
+                    Console.WriteLine("Quantidade de Horas invalida. Veiculo não foi removido. Tente novamente digitando um valor numerico");
+                    return;
+                }
+                
+ 
                 // TODO: Remover a placa digitada da lista de veículos
                 // *IMPLEMENTE AQUI*
 
+                veiculos.Remove(placa);
                 Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
             }
             else
@@ -57,6 +82,17 @@ namespace DesafioFundamentos.Models
                 Console.WriteLine("Os veículos estacionados são:");
                 // TODO: Realizar um laço de repetição, exibindo os veículos estacionados
                 // *IMPLEMENTE AQUI*
+
+                // Temos duas formas de fazer o laço.
+                // for(int contador = 0; contador < veiculos.Count; contador++ )
+                // {
+                //     Console.WriteLine(veiculos[contador]);
+                // }
+
+                foreach (string item in veiculos)
+                {
+                   Console.WriteLine(item);       
+                }
             }
             else
             {
